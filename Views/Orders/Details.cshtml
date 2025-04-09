@@ -1,0 +1,57 @@
+@model Tran_Zachary_HW5.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details</h1>
+
+<div>
+    <h4>Order Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.OrderNumber)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.OrderNumber)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.OrderDate)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.OrderDate)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.OrderNotes)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.OrderNotes)</dd>
+    </dl>
+</div>
+
+<h4>Order Items</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Extended Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.OrderDetails)
+        {
+            <tr>
+                <td>@detail.Product.Name</td>
+                <td>@detail.Price.ToString("C")</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.ExtendedPrice.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Order Summary</h4>
+<div class="order-summary">
+    <p>Subtotal: @Model.OrderSubtotal.ToString("C")</p>
+    <p>Sales Tax (8.25%): @Model.SalesTax.ToString("C")</p>
+    <p><strong>Total: @Model.OrderTotal.ToString("C")</strong></p>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OrderID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

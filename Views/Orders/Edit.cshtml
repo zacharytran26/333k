@@ -1,0 +1,83 @@
+@model Tran_Zachary_HW5.Models.Order
+
+@{
+    ViewData["Title"] = "Edit Order";
+}
+
+<h1>Edit Order</h1>
+
+<h4>Order Information</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden input for OrderID -->
+            <input type="hidden" asp-for="OrderID" />
+
+            <!-- Display OrderNumber as non-editable -->
+            <div class="form-group">
+                <label asp-for="OrderNumber" class="control-label"></label>
+                <input asp-for="OrderNumber" class="form-control" readonly />
+                <span asp-validation-for="OrderNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Display OrderDate as non-editable -->
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" readonly />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+
+            <!-- Editable OrderNotes field -->
+            <div class="form-group">
+                <label asp-for="OrderNotes" class="control-label"></label>
+                <input asp-for="OrderNotes" class="form-control" />
+                <span asp-validation-for="OrderNotes" class="text-danger"></span>
+            </div>
+
+            <!-- Save button -->
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4>Order Items</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Extended Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.OrderDetails)
+        {
+            <tr>
+                <td>@detail.Product.Name</td>
+                <td>@detail.Price.ToString("C")</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.ExtendedPrice.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Button to add a new item to the order -->
+<a asp-action="Create" asp-controller="OrderDetails" asp-route-orderID="@Model.OrderID" class="btn btn-success">Add Item</a>
+
+<!-- Button to edit existing items on the order -->
+<a asp-action="Index" asp-controller="OrderDetails" asp-route-orderID="@Model.OrderID" class="btn btn-info">Edit Items</a>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

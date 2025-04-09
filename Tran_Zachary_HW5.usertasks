@@ -1,0 +1,10 @@
+<ListOfTaskListEntry>
+  <TaskListEntry file="" description="add in the detail of suppliers the products that are associated " completed="True" />
+  <TaskListEntry file="" description="Registering user does not work" completed="True" />
+  <TaskListEntry file="" description="NullReferenceException: Object reference not set to an instance of an object. whenever I create an order " completed="True" />
+  <TaskListEntry file="" description="creating a new order that goes to the order details create page does not work " priority="High" completed="True" />
+  <TaskListEntry file="" description="The create in the order detail is not working " completed="True" />
+  <TaskListEntry file="" description="edit order: the product name is not displaying" />
+  <TaskListEntry file="" />
+  <TaskListEntry file="" description="Make sure I cannot input a negative value " />
+</ListOfTaskListEntry>
